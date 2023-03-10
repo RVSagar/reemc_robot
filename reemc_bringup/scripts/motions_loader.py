@@ -61,7 +61,7 @@ if __name__ == '__main__':
         PUBLIC_CONFIG_YAML = 'reemc_' + robot_name + '_motions.yaml'
 
     rp = RosPack()
-    print "Loading public motions from: " + PUBLIC_PKG_NAME
+    print("Loading public motions from: " + PUBLIC_PKG_NAME)
     pub_pkg_path = rp.get_path(PUBLIC_PKG_NAME)
     pub_config_yaml = PUBLIC_CONFIG_YAML
     pub_full_path = pub_pkg_path + '/config/' + pub_config_yaml
@@ -69,20 +69,20 @@ if __name__ == '__main__':
         load_params_from_yaml(pub_full_path)
     except IOError:
         # We should load at least some movements, so we hardcode here the really default file
-        print str(pub_full_path) + " not found! Falling back to " + pub_pkg_path + '/config/reemc_motions.yaml'
+        print(str(pub_full_path) + " not found! Falling back to " + pub_pkg_path + '/config/reemc_motions.yaml')
         load_params_from_yaml(pub_pkg_path + '/config/reemc_motions.yaml')
 
-    print "Trying to find private package: " + PRIVATE_PKG_NAME
+    print("Trying to find private package: " + PRIVATE_PKG_NAME)
     try:
         pkg_path = rp.get_path(PRIVATE_PKG_NAME)
         config_yaml = PRIVATE_CONFIG_YAML
         full_path = pkg_path + '/config/' + config_yaml
-        print "Loading params from: " +  full_path
+        print("Loading params from: " +  full_path)
         load_params_from_yaml(full_path)
     except ResourceNotFound:
-        print "Not found, only using public motions."
+        print("Not found, only using public motions.")
     except IOError:
-        print "Package found but " + config_yaml + " not found, only using public motions."
+        print("Package found but " + config_yaml + " not found, only using public motions.")
 
-    print "Finished."
+    print("Finished.")
     
